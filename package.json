@@ -17,6 +17,7 @@
     "@angular/forms": "~13.2.0",
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
+    "@angular/platform-server": "~13.2.0",
     "@angular/router": "~13.2.0",
     "@nguniversal/express-engine": "^13.0.2",
     "@nguniversal/module-map-ngfactory-loader": "^8.2.6",

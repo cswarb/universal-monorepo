@@ -6,16 +6,23 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
-        "outputPath": "dist/apps/app-one",
+        "outputPath": "dist/app-one/browser",
         "index": "apps/app-one/src/index.html",
         "main": "apps/app-one/src/main.ts",
         "polyfills": "apps/app-one/src/polyfills.ts",
         "tsConfig": "apps/app-one/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/app-one/src/favicon.ico", "apps/app-one/src/assets"],
-        "styles": ["apps/app-one/src/styles.scss"],
+        "assets": [
+          "apps/app-one/src/favicon.ico",
+          "apps/app-one/src/assets"
+        ],
+        "styles": [
+          "apps/app-one/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -80,11 +87,39 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/app-one"],
+      "outputs": [
+        "coverage/apps/app-one"
+      ],
       "options": {
         "jestConfig": "apps/app-one/jest.config.js",
         "passWithNoTests": true
       }
+    },
+    "server": {
+      "executor": "@angular-devkit/build-angular:server",
+      "options": {
+        "outputPath": "dist/apps/app-one/server",
+        "main": "apps/app-one/src/main.server.ts",
+        "tsConfig": "apps/app-one/tsconfig.server.json",
+        "inlineStyleLanguage": "scss"
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media",
+          "fileReplacements": [
+            {
+              "replace": "apps/app-one/src/environments/environment.ts",
+              "with": "apps/app-one/src/environments/environment.prod.ts"
+            }
+          ]
+        },
+        "development": {
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false
+        }
+      },
+      "defaultConfiguration": "production"
     }
   },
   "tags": []
