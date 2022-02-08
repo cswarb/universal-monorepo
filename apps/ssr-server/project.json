@@ -1,0 +1,68 @@
+{
+  "root": "apps/ssr-server",
+  "sourceRoot": "apps/ssr-server/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/ssr-server",
+        "main": "apps/ssr-server/src/main.ts",
+        "tsConfig": "apps/ssr-server/tsconfig.app.json",
+        "assets": ["apps/ssr-server/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/ssr-server/src/environments/environment.ts",
+              "with": "apps/ssr-server/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "ssr-server:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/ssr-server/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/ssr-server"],
+      "options": {
+        "jestConfig": "apps/ssr-server/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "serve-all": {
+      "builder": "@angular-devkit/architect:concat",
+      "options": {
+        "targets": [
+          {
+            "target": "app-one:build"
+          },
+          {
+            "target": "app-one:server"
+          },
+          {
+            "target": "ssr-server:serve"
+          }
+        ]
+      }
+    }
+  },
+  "tags": []
+}

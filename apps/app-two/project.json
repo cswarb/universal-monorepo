@@ -10,7 +10,7 @@
         "{options.outputPath}"
       ],
       "options": {
-        "outputPath": "dist/app-two/browser",
+        "outputPath": "dist/apps/app-two/browser",
         "index": "apps/app-two/src/index.html",
         "main": "apps/app-two/src/main.ts",
         "polyfills": "apps/app-two/src/polyfills.ts",
